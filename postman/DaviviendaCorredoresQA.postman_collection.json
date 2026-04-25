@@ -1,0 +1,195 @@
+{
+  "info": {
+    "_postman_id": "98e74673-a259-4784-8c68-e435eeb6bf4f",
+    "name": "Davivienda Corredores Q&A API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": "Coleccion para probar la API local de Q&A con scraping + Gemma"
+  },
+  "item": [
+    {
+      "name": "Health",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/health",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "health"
+          ]
+        }
+      },
+      "response": [],
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Status 200', function () {",
+              "  pm.response.to.have.status(200);",
+              "});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Reindex",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"max_pages\": {{max_pages}}\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/reindex",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "reindex"
+          ]
+        }
+      },
+      "response": [],
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Status 200', function () {",
+              "  pm.response.to.have.status(200);",
+              "});",
+              "pm.test('indexed_pages exists', function () {",
+              "  var jsonData = pm.response.json();",
+              "  pm.expect(jsonData).to.have.property('indexed_pages');",
+              "});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Debug Index",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/debug/index?limit=20",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "debug",
+            "index"
+          ],
+          "query": [
+            {
+              "key": "limit",
+              "value": "20"
+            }
+          ]
+        }
+      },
+      "response": [],
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Status 200', function () {",
+              "  pm.response.to.have.status(200);",
+              "});",
+              "pm.test('Has indexed_pages', function () {",
+              "  var jsonData = pm.response.json();",
+              "  pm.expect(jsonData).to.have.property('indexed_pages');",
+              "});",
+              "pm.test('Has items array', function () {",
+              "  var jsonData = pm.response.json();",
+              "  pm.expect(jsonData.items).to.be.an('array');",
+              "});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Ask",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"question\": \"¿Qué productos de inversión ofrecen para personas?\",\n  \"top_k\": {{top_k}},\n  \"model\": \"{{model}}\"\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/ask",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "ask"
+          ]
+        }
+      },
+      "response": [],
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Status 200', function () {",
+              "  pm.response.to.have.status(200);",
+              "});",
+              "pm.test('Has answer', function () {",
+              "  var jsonData = pm.response.json();",
+              "  pm.expect(jsonData).to.have.property('answer');",
+              "  pm.expect(jsonData.answer.length).to.be.above(10);",
+              "});",
+              "pm.test('Has sources array', function () {",
+              "  var jsonData = pm.response.json();",
+              "  pm.expect(jsonData).to.have.property('sources');",
+              "  pm.expect(jsonData.sources).to.be.an('array');",
+              "});"
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://127.0.0.1:8000"
+    },
+    {
+      "key": "model",
+      "value": "gemma4:e4b"
+    },
+    {
+      "key": "max_pages",
+      "value": "20"
+    },
+    {
+      "key": "top_k",
+      "value": "4"
+    }
+  ]
+}
