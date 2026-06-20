@@ -71,6 +71,13 @@ storage_state.json
 *.har
 screenshots/
 videos/
+ms-playwright/
+.playwright/
+
+# Wheel and pip artifacts
+*.whl
+pip-log.txt
+pip-selfcheck.json
 
 # OS files
 .DS_Store

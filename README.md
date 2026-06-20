@@ -1,188 +1,143 @@
-# Scraping Codelab
+# Davivienda Corredores Q&A
 
-## Descripción
+Asistente de preguntas y respuestas sobre el sitio público de Davivienda Corredores. Combina scraping con múltiples capas anti-bot, indexación RAG personalizada en español, y soporte para dos proveedores LLM: **Ollama** (local) y **Google Gemini** (nube), seleccionables mediante una variable de entorno.
 
-Este proyecto contiene dos scripts de web scraping que extraen citas de [Quotes to Scrape](https://quotes.toscrape.com/):
+## Componentes
 
-### `scraper.py` — Web Scraper tradicional
-Utiliza **Requests** y **BeautifulSoup** para hacer scraping estático de la página. Recorre múltiples páginas extrayendo citas, autores y tags.
-
-### `agent_browser.py` — Agente de IA con navegador
-Utiliza **LangChain** con **Gemma en local (vía Ollama)** y **Playwright** para crear un agente de IA que controla un navegador real. El agente navega a la página, extrae la primera cita y la traduce a español, japonés y swahili.
-
-### `davivienda_chat_qa.py` — Chat Q&A con scraping de Davivienda Corredores
-Hace scraping de páginas públicas de Davivienda Corredores, indexa contenido y responde preguntas de clientes usando **Gemma local (Ollama)** con fuentes citadas.
-
-### `api.py` — API para integrar el chat en una app
-Expone endpoints HTTP para consultar preguntas de clientes, refrescar índice y revisar estado del servicio.
+| Archivo | Rol |
+|---|---|
+| `davivienda_chat_qa.py` | CLI interactivo o pregunta única |
+| `api.py` | API REST (FastAPI) |
+| `scraper.py` | Scraper educativo estático (quotes.toscrape.com) |
+| `agent_browser.py` | Agente IA con navegador Playwright |
+| `core/` | Toda la lógica de negocio (scraping, retrieval, LLM, QA) |
 
 ## Requisitos previos
 
 - Python 3.10+
-- [Ollama](https://ollama.com/) instalado
-- Un modelo Gemma descargado en Ollama (por ejemplo, `gemma4:e4b`)
+- [Ollama](https://ollama.com/) — solo si usas `LLM_PROVIDER=ollama`
+- Clave de [Google AI Studio](https://aistudio.google.com/) — solo si usas `LLM_PROVIDER=gemini`
 
-## Inicio rapido (Windows PowerShell)
+## Inicio rápido (Windows PowerShell)
 
-1. Ir a la carpeta del proyecto:
-   ```powershell
-   cd C:\Users\tamac\Documents\5.GENIA\roboAdvisor\scraping-codelab
-   ```
-
-2. Crear y activar entorno virtual:
-   ```powershell
-   py -3.14 -m venv venv
-   .\venv\Scripts\Activate.ps1
-   ```
-
-3. Instalar dependencias usando el Python activo (recomendado):
-   ```powershell
-   python -m pip install --upgrade pip
-   python -m pip install -r .\requirements.txt
-   ```
-
-4. Instalar navegadores de Playwright:
-   ```powershell
-   python -m playwright install
-   ```
-
-5. Asegurar modelo local en Ollama:
-   ```powershell
-   ollama pull gemma4:e4b
-   ```
-
-6. Crear archivo `.env` en la raiz:
-   ```env
-   LOCAL_MODEL=gemma4:e4b
-   LLM_TEMPERATURE=0
-   ```
-
-7. Levantar la API:
-   ```powershell
-   python -m uvicorn api:app --host 0.0.0.0 --port 8000 --reload
-   ```
-
-8. Verificar servicio:
-   ```powershell
-   curl http://localhost:8000/health
-   ```
-
-## Solucion de error: "Fatal error in launcher"
-
-Si aparece un error como este al instalar dependencias:
-
-`Fatal error in launcher: Unable to create process ...`
-
-normalmente significa que `pip.exe` quedo enlazado a una ruta vieja del entorno virtual.
-
-Solucion recomendada:
+### 1. Entorno virtual
 
 ```powershell
-deactivate
-Remove-Item -Recurse -Force .\venv
 py -3.14 -m venv venv
 .\venv\Scripts\Activate.ps1
 python -m pip install --upgrade pip
-python -m pip install -r .\requirements.txt
+python -m pip install -r requirements.txt
+python -m playwright install
 ```
 
-Nota: usa `python -m pip` en lugar de `pip` para evitar conflictos de PATH en Windows.
+> Si aparece *"Fatal error in launcher"*, elimina el venv y vuelve a crearlo usando siempre `python -m pip` en lugar de `pip` directamente.
 
-## Instalación
+### 2. Configurar `.env`
 
-1. Clonar el repositorio:
-   ```bash
-   git clone <url-del-repositorio>
-   cd scraping-codelab
-   ```
+Copia el archivo de ejemplo y edítalo:
 
-2. Crear y activar un entorno virtual:
-   ```bash
-   python -m venv venv
-
-   # Windows (PowerShell)
-   .\venv\Scripts\Activate.ps1
-
-   # Linux/Mac
-   source venv/bin/activate
-   ```
-
-3. Instalar dependencias:
-   ```bash
-   python -m pip install -r requirements.txt
-   ```
-
-4. Instalar los navegadores de Playwright:
-   ```bash
-   playwright install
-   ```
-
-5. Descargar un modelo Gemma local con Ollama:
-   ```bash
-   ollama pull gemma4:e4b
-   ```
-
-6. Configurar las variables de entorno. Crear un archivo `.env` en la raíz del proyecto:
-   ```
-   LOCAL_MODEL=gemma4:e4b
-   LLM_TEMPERATURE=0
-   ```
-
-Si no defines `LOCAL_MODEL`, el script usa `gemma4:e4b` por defecto.
-Si no defines `LLM_TEMPERATURE`, se usa `0` por defecto.
-
-## Ejecución
-
-### Scraper tradicional
-```bash
-python scraper.py
+```powershell
+copy .env.example .env
 ```
-Extrae citas de las primeras 3 páginas y las muestra en consola.
 
-### Agente de IA con navegador
-```bash
-python agent_browser.py
+**Solo cambia `LLM_PROVIDER`** para elegir el backend:
+
+```env
+# Para usar Ollama (modelo local, no requiere internet)
+LLM_PROVIDER=ollama
+LOCAL_MODEL=gemma4-financiero   # debe coincidir con: ollama list
+
+# Para usar Gemini (nube, requiere GOOGLE_API_KEY)
+LLM_PROVIDER=gemini
+GEMINI_MODEL=gemini-2.0-flash
+GOOGLE_API_KEY=tu-clave-aqui
 ```
-Abre un navegador Chromium, navega a la página de citas y usa IA para extraer y traducir la primera cita.
 
-### Chat Q&A con scraping de Davivienda Corredores
+Puedes tener todas las variables en el `.env` al mismo tiempo; solo se usa la sección del proveedor activo.
 
-Modo chat interactivo:
-```bash
+### 3. Descargar modelo (solo Ollama)
+
+```powershell
+ollama pull gemma4:e4b
+```
+
+Asegúrate de que el nombre coincida con `LOCAL_MODEL` en tu `.env`.
+
+### 4. Ejecutar
+
+```powershell
+# Chat interactivo
 python davivienda_chat_qa.py --max-pages 20 --top-k 4
+
+# Pregunta única
+python davivienda_chat_qa.py --question "¿Qué productos de inversión ofrecen?" --max-pages 20
+
+# API REST
+python -m uvicorn api:app --host 0.0.0.0 --port 8000 --reload
 ```
 
-Pregunta única por línea de comando:
-```bash
-python davivienda_chat_qa.py --question "¿Qué productos de inversión ofrecen para personas?" --max-pages 20 --top-k 4
-```
+## API REST
 
-Opcionalmente puedes cambiar el modelo:
-```bash
-python davivienda_chat_qa.py --model gemma4:e4b
-```
+| Método | Endpoint | Descripción |
+|---|---|---|
+| `GET` | `/health` | Estado del servicio, proveedor activo y páginas indexadas |
+| `POST` | `/ask` | Responde una pregunta (`question`, `top_k?`, `model?`) |
+| `POST` | `/reindex` | Reconstruye el índice de documentos (`max_pages?`) |
+| `GET` | `/debug/index` | Lista los documentos indexados (desarrollo) |
 
-### API HTTP (FastAPI)
+Colección Postman lista para importar: `postman/DaviviendaCorredoresQA.postman_collection.json`
 
-Levantar servidor:
-```bash
-uvicorn api:app --host 0.0.0.0 --port 8000
-```
+### Ejemplos curl
 
-Health check:
 ```bash
+# Health check
 curl http://localhost:8000/health
+
+# Preguntar
+curl -X POST http://localhost:8000/ask \
+  -H "Content-Type: application/json" \
+  -d '{"question": "¿Qué productos de inversión ofrecen para personas?", "top_k": 4}'
+
+# Reindexar
+curl -X POST http://localhost:8000/reindex \
+  -H "Content-Type: application/json" \
+  -d '{"max_pages": 20}'
 ```
 
-Reindexar contenido:
-```bash
-curl -X POST http://localhost:8000/reindex -H "Content-Type: application/json" -d "{\"max_pages\":20}"
+## Arquitectura `core/`
+
+```
+core/
+├── document.py          # Dataclass Document (url, title, text)
+├── utils.py             # Normalización de texto compartida
+├── scraping/
+│   ├── fetcher.py       # HTTP con fallback anti-bot (requests → cloudscraper → urllib)
+│   ├── parser.py        # Extracción y limpieza de HTML
+│   └── corpus.py        # build_corpus, sitemap, filtros de URL
+├── retrieval/
+│   └── search.py        # Tokenizador español + scorer BM25-like
+├── llm/
+│   ├── base.py          # Protocol LLMClient
+│   ├── factory.py       # get_llm_client() — lee LLM_PROVIDER del .env
+│   ├── ollama/
+│   │   └── client.py    # OllamaClient
+│   └── gemini/
+│       └── client.py    # GeminiClient
+└── qa/
+    ├── pipeline.py      # answer_question, build_prompt
+    ├── guardrails.py    # Detección de competidores → respuesta bloqueada
+    └── fallback.py      # Fallback extractivo cuando el LLM no encuentra info
 ```
 
-Preguntar al asistente:
-```bash
-curl -X POST http://localhost:8000/ask -H "Content-Type: application/json" -d "{\"question\":\"¿Qué productos de inversión ofrecen para personas?\",\"top_k\":4,\"model\":\"gemma4:e4b\"}"
-```
+## Flujo de datos
 
-Colección de Postman lista para importar:
-- `postman/DaviviendaCorredoresQA.postman_collection.json`
+```
+TARGET_URL
+  → Scraping anti-bot (3 capas)
+  → Extracción de texto limpio por página
+  → List[Document]
+  → Scorer BM25 español → Top-K documentos
+  → Guardrail de competidores (corto-circuita si aplica)
+  → LLM (Ollama o Gemini según LLM_PROVIDER)
+  → Si responde "no encontré" → fallback extractivo por oraciones
+```

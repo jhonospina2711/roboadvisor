@@ -1,0 +1,122 @@
+Traceback (most recent call last):
+  File "D:\2.Desarrollo\MEFIA\roboadvisor\venv\Lib\site-packages\httpx\_transports\default.py", line 101, in map_httpcore_exceptions
+[1/5] OK http://wpslabv9-1.davivienda.loc:10039/wps/portal/corredores/personas/!ut/p/z1/04_Sj9CPykssy0xPLMnMz0vMAfIjo8zizQJM3Q09LIz8_N18jA0CPYxNnLyNzQ1NLAz0wwkpiAJKG-AAjiD9UYSUFORGGKQ7KioCADSXhWM!/dz/d5/L2dBISEvZ0FBIS9nQSEh/
+[2/5] OK http://wpslabv9-1.davivienda.loc:10039/wps/portal/corredores/personas/contenido/por-que-corredores
+[3/5] OK http://wpslabv9-1.davivienda.loc:10039/wps/portal/corredores/personas/contenido/gestion-activos/fondos_inversion_colectiva
+[4/5] OK http://wpslabv9-1.davivienda.loc:10039/wps/portal/corredores/personas/contenido/gestion-activos/administracion-portafolio-terceros
+[5/5] OK http://wpslabv9-1.davivienda.loc:10039/wps/portal/corredores/personas/contenido/Intermediacion/renta-fija
+
+Paginas indexadas: 5
+
+=== RESPUESTA ===
+    yield
+  File "D:\2.Desarrollo\MEFIA\roboadvisor\venv\Lib\site-packages\httpx\_transports\default.py", line 250, in handle_request
+    resp = self._pool.handle_request(req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\2.Desarrollo\MEFIA\roboadvisor\venv\Lib\site-packages\httpcore\_sync\connection_pool.py", line 256, in handle_request
+    raise exc from None
+  File "D:\2.Desarrollo\MEFIA\roboadvisor\venv\Lib\site-packages\httpcore\_sync\connection_pool.py", line 236, in handle_request
+    response = connection.handle_request(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\2.Desarrollo\MEFIA\roboadvisor\venv\Lib\site-packages\httpcore\_sync\connection.py", line 101, in handle_request
+    raise exc
+  File "D:\2.Desarrollo\MEFIA\roboadvisor\venv\Lib\site-packages\httpcore\_sync\connection.py", line 78, in handle_request
+    stream = self._connect(request)
+             ^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\2.Desarrollo\MEFIA\roboadvisor\venv\Lib\site-packages\httpcore\_sync\connection.py", line 156, in _connect
+    stream = stream.start_tls(**kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\2.Desarrollo\MEFIA\roboadvisor\venv\Lib\site-packages\httpcore\_backends\sync.py", line 154, in start_tls
+    with map_exceptions(exc_map):
+  File "C:\Users\jospina\AppData\Local\Programs\Python\Python312\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(value)
+  File "D:\2.Desarrollo\MEFIA\roboadvisor\venv\Lib\site-packages\httpcore\_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+httpcore.ConnectError: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1000)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\2.Desarrollo\MEFIA\roboadvisor\davivienda_chat_qa.py", line 88, in <module>
+    main()
+  File "D:\2.Desarrollo\MEFIA\roboadvisor\davivienda_chat_qa.py", line 77, in main
+    run_single_question(
+  File "D:\2.Desarrollo\MEFIA\roboadvisor\davivienda_chat_qa.py", line 38, in run_single_question
+    print(answer_question(question=question, docs=docs, llm=llm, top_k=top_k))
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\2.Desarrollo\MEFIA\roboadvisor\core\qa\pipeline.py", line 82, in answer_question
+    answer = llm.invoke(prompt)
+             ^^^^^^^^^^^^^^^^^^
+  File "D:\2.Desarrollo\MEFIA\roboadvisor\core\llm\gemini\client.py", line 40, in invoke
+    result = self._llm.invoke(prompt)
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\2.Desarrollo\MEFIA\roboadvisor\venv\Lib\site-packages\langchain_google_genai\chat_models.py", line 2701, in invoke
+    return super().invoke(input, config, stop=stop, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\2.Desarrollo\MEFIA\roboadvisor\venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 476, in invoke
+    self.generate_prompt(
+  File "D:\2.Desarrollo\MEFIA\roboadvisor\venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1849, in generate_prompt
+    return self.generate(prompt_messages, stop=stop, callbacks=callbacks, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\2.Desarrollo\MEFIA\roboadvisor\venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1656, in generate
+    self._generate_with_cache(
+  File "D:\2.Desarrollo\MEFIA\roboadvisor\venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1994, in _generate_with_cache
+    result = self._generate(
+             ^^^^^^^^^^^^^^^
+  File "D:\2.Desarrollo\MEFIA\roboadvisor\venv\Lib\site-packages\langchain_google_genai\chat_models.py", line 3234, in _generate
+    response: GenerateContentResponse = self.client.models.generate_content(
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\2.Desarrollo\MEFIA\roboadvisor\venv\Lib\site-packages\google\genai\models.py", line 6488, in generate_content
+    response = self._generate_content(
+               ^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\2.Desarrollo\MEFIA\roboadvisor\venv\Lib\site-packages\google\genai\models.py", line 4916, in _generate_content
+    response = self._api_client.request(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\2.Desarrollo\MEFIA\roboadvisor\venv\Lib\site-packages\google\genai\_api_client.py", line 1618, in request
+    response = self._request(http_request, http_options, stream=False)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\2.Desarrollo\MEFIA\roboadvisor\venv\Lib\site-packages\google\genai\_api_client.py", line 1409, in _request
+    return retry(self._request_once, http_request, stream)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\2.Desarrollo\MEFIA\roboadvisor\venv\Lib\site-packages\tenacity\__init__.py", line 470, in __call__
+    do = self.iter(retry_state=retry_state)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\2.Desarrollo\MEFIA\roboadvisor\venv\Lib\site-packages\tenacity\__init__.py", line 371, in iter
+    result = action(retry_state)
+             ^^^^^^^^^^^^^^^^^^^
+  File "D:\2.Desarrollo\MEFIA\roboadvisor\venv\Lib\site-packages\tenacity\__init__.py", line 413, in exc_check
+    raise retry_exc.reraise()
+          ^^^^^^^^^^^^^^^^^^^
+  File "D:\2.Desarrollo\MEFIA\roboadvisor\venv\Lib\site-packages\tenacity\__init__.py", line 184, in reraise
+    raise self.last_attempt.result()
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jospina\AppData\Local\Programs\Python\Python312\Lib\concurrent\futures\_base.py", line 449, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jospina\AppData\Local\Programs\Python\Python312\Lib\concurrent\futures\_base.py", line 401, in __get_result
+    raise self._exception
+  File "D:\2.Desarrollo\MEFIA\roboadvisor\venv\Lib\site-packages\tenacity\__init__.py", line 473, in __call__
+    result = fn(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^
+  File "D:\2.Desarrollo\MEFIA\roboadvisor\venv\Lib\site-packages\google\genai\_api_client.py", line 1387, in _request_once
+    response = self._httpx_client.send(httpx_request, stream=stream)  # type: ignore[union-attr]
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\2.Desarrollo\MEFIA\roboadvisor\venv\Lib\site-packages\httpx\_client.py", line 914, in send
+    response = self._send_handling_auth(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\2.Desarrollo\MEFIA\roboadvisor\venv\Lib\site-packages\httpx\_client.py", line 942, in _send_handling_auth
+    response = self._send_handling_redirects(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\2.Desarrollo\MEFIA\roboadvisor\venv\Lib\site-packages\httpx\_client.py", line 979, in _send_handling_redirects
+    response = self._send_single_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\2.Desarrollo\MEFIA\roboadvisor\venv\Lib\site-packages\httpx\_client.py", line 1014, in _send_single_request
+    response = transport.handle_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\2.Desarrollo\MEFIA\roboadvisor\venv\Lib\site-packages\httpx\_transports\default.py", line 249, in handle_request
+    with map_httpcore_exceptions():
+  File "C:\Users\jospina\AppData\Local\Programs\Python\Python312\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(value)
+  File "D:\2.Desarrollo\MEFIA\roboadvisor\venv\Lib\site-packages\httpx\_transports\default.py", line 118, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.ConnectError: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1000)

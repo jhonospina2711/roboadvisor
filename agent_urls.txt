@@ -1,0 +1,63 @@
+Abriendo: http://wpslabv9-1.davivienda.loc:10039/wps/portal/corredores/personas/!ut/p/z1/04_Sj9CPykssy0xPLMnMz0vMAfIjo8zizQJM3Q09LIz8_N18jA0CPYxNnLyNzQ1NLAz0wwkpiAJKG-AAjiD9UYSUFORGGKQ7KioCADSXhWM!/dz/d5/L2dBISEvZ0FBIS9nQSEh/
+Links de men· encontrados: 26
+
+  [ext] Empiece a Invertir
+       https://vinculaciondigital.daviviendacorredores.com/#/login?returnUrl=%2Fhome
+  [--] Zona transa
+       Error: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://zonatransaccional.corredores.com/CorredoresEnLinea/Login2.aspx?ReturnUr
+  [OK] QuiÚnes somos
+       http://wpslabv9-1.davivienda.loc:10039/wps/portal/corredores/personas/contenido/por-que-corredores
+  [OK] Fondos de Inversi¾n Colectiva
+       http://wpslabv9-1.davivienda.loc:10039/wps/portal/corredores/personas/contenido/gestion-activos/fondos_inversion_colectiva
+  [OK] Administraci¾n de portafolio de terceros
+       http://wpslabv9-1.davivienda.loc:10039/wps/portal/corredores/personas/contenido/gestion-activos/administracion-portafolio-terceros
+  [ext] Davicash
+       https://comunicaciones.daviviendacorredores.com/davicash-empresarial/
+  [OK] Renta fija
+       http://wpslabv9-1.davivienda.loc:10039/wps/portal/corredores/personas/contenido/Intermediacion/renta-fija
+  [OK] Renta Variable
+       http://wpslabv9-1.davivienda.loc:10039/wps/portal/corredores/personas/contenido/Intermediacion/renta-variable
+  [OK] Divisas
+       http://wpslabv9-1.davivienda.loc:10039/wps/portal/corredores/personas/contenido/Intermediacion/divisas
+  [OK] Derivados
+       http://wpslabv9-1.davivienda.loc:10039/wps/portal/corredores/personas/contenido/Intermediacion/derivados
+  [OK] Davivienda Homebroker
+       http://wpslabv9-1.davivienda.loc:10039/wps/portal/corredores/personas/contenido/Intermediacion/homebroker
+  [OK] ETFs
+       http://wpslabv9-1.davivienda.loc:10039/wps/portal/corredores/!ut/p/z0/04_Sj9CPykssy0xPLMnMz0vMAfIjo8zi_TwsTQy9LYz8LAI9XAwCjT0dff28Qg1MvM31C7IdFQH2niBQ/
+  [OK] UCITS
+       http://wpslabv9-1.davivienda.loc:10039/wps/portal/corredores/!ut/p/z0/04_Sj9CPykssy0xPLMnMz0vMAfIjo8zi_TwsTQy9LYz8LDxDTAwC3ZyNgy29HI3cQ030C7IdFQEuHhMx/
+  [OK] OPA Familia
+       http://wpslabv9-1.davivienda.loc:10039/wps/portal/corredores/personas/contenido/Intermediacion/opa_familia
+  [OK] Banca de inversi¾n
+       http://wpslabv9-1.davivienda.loc:10039/wps/portal/corredores/personas/contenido/banca-inversion
+  [OK] Inversiones Internacionales
+       http://wpslabv9-1.davivienda.loc:10039/wps/portal/corredores/!ut/p/z0/04_Sj9CPykssy0xPLMnMz0vMAfIjo8zi_TwsTQy9LYz8LDxDTAwC3ZyNgy29HI3cDYz1C7IdFQHUTZj1/
+  [ext] Portal Research - Visi¾n
+       https://vision.davivienda.com/?utm_source=davivienda-corredores&utm_medium=redirected&utm_campaign=redir-dominio-corredores_slf&utm_content=na_link_na&utm_term=na
+  [ext] Eventos
+       https://comunicaciones.daviviendacorredores.com/streamings/
+  [ext] Recomendaciones
+       https://comunicaciones.daviviendacorredores.com/en-que-invertir-2022/
+  [OK] Monitoreo de mercado
+       http://wpslabv9-1.davivienda.loc:10039/wps/portal/corredores/personas/contenido/herramientas-financieras/monitoreo-mercado
+  [OK] Calculadoras
+       http://wpslabv9-1.davivienda.loc:10039/wps/portal/corredores/personas/contenido/herramientas-financieras/calculadoras
+  [OK] Simuladores
+       http://wpslabv9-1.davivienda.loc:10039/wps/portal/corredores/personas/contenido/herramientas-financieras/simuladores
+  [OK] Noticias
+       http://wpslabv9-1.davivienda.loc:10039/wps/portal/corredores/personas/contenido/herramientas-financieras/noticias
+  [ext] Mis finanzas para invertir
+       https://www.misfinanzasparainvertir.com/
+  [OK] test
+       http://wpslabv9-1.davivienda.loc:10039/wps/portal/corredores/personas/contenido/test
+  [OK] TestVideos
+       http://wpslabv9-1.davivienda.loc:10039/wps/portal/corredores/personas/contenido/TestVideos
+
+============================================================
+Total descubiertas: 25  |  Internas: 19
+
+Agrega esto a tu .env:
+
+SEED_URLS=http://wpslabv9-1.davivienda.loc:10039/wps/portal/corredores/personas/contenido/por-que-corredores,http://wpslabv9-1.davivienda.loc:10039/wps/portal/corredores/personas/contenido/gestion-activos/fondos_inversion_colectiva,http://wpslabv9-1.davivienda.loc:10039/wps/portal/corredores/personas/contenido/gestion-activos/administracion-portafolio-terceros,http://wpslabv9-1.davivienda.loc:10039/wps/portal/corredores/personas/contenido/Intermediacion/renta-fija,http://wpslabv9-1.davivienda.loc:10039/wps/portal/corredores/personas/contenido/Intermediacion/renta-variable,http://wpslabv9-1.davivienda.loc:10039/wps/portal/corredores/personas/contenido/Intermediacion/divisas,http://wpslabv9-1.davivienda.loc:10039/wps/portal/corredores/personas/contenido/Intermediacion/derivados,http://wpslabv9-1.davivienda.loc:10039/wps/portal/corredores/personas/contenido/Intermediacion/homebroker,http://wpslabv9-1.davivienda.loc:10039/wps/portal/corredores/!ut/p/z0/04_Sj9CPykssy0xPLMnMz0vMAfIjo8zi_TwsTQy9LYz8LAI9XAwCjT0dff28Qg1MvM31C7IdFQH2niBQ/,http://wpslabv9-1.davivienda.loc:10039/wps/portal/corredores/!ut/p/z0/04_Sj9CPykssy0xPLMnMz0vMAfIjo8zi_TwsTQy9LYz8LDxDTAwC3ZyNgy29HI3cQ030C7IdFQEuHhMx/,http://wpslabv9-1.davivienda.loc:10039/wps/portal/corredores/personas/contenido/Intermediacion/opa_familia,http://wpslabv9-1.davivienda.loc:10039/wps/portal/corredores/personas/contenido/banca-inversion,http://wpslabv9-1.davivienda.loc:10039/wps/portal/corredores/!ut/p/z0/04_Sj9CPykssy0xPLMnMz0vMAfIjo8zi_TwsTQy9LYz8LDxDTAwC3ZyNgy29HI3cDYz1C7IdFQHUTZj1/,http://wpslabv9-1.davivienda.loc:10039/wps/portal/corredores/personas/contenido/herramientas-financieras/monitoreo-mercado,http://wpslabv9-1.davivienda.loc:10039/wps/portal/corredores/personas/contenido/herramientas-financieras/calculadoras,http://wpslabv9-1.davivienda.loc:10039/wps/portal/corredores/personas/contenido/herramientas-financieras/simuladores,http://wpslabv9-1.davivienda.loc:10039/wps/portal/corredores/personas/contenido/herramientas-financieras/noticias,http://wpslabv9-1.davivienda.loc:10039/wps/portal/corredores/personas/contenido/test,http://wpslabv9-1.davivienda.loc:10039/wps/portal/corredores/personas/contenido/TestVideos
+============================================================
